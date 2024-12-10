@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    <li><a href="/contracts" class="link">Контракты</a></li>
+                    <li><a href="/information" class="link">Информация</a></li>
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section add-section">
+            <form action="/add_user" method="post">
+                <p>Имя пользователя: <input type="text" name="username" placeholder="Имя пользователя"></p>
+                <p>Пароль: <input type="text" name="password" placeholder="Пароль"></p>                
+                <button type="submit" class="add-btn">Добавить</button>
+            </form>
+        </section>
+
+        <section class="section">
+            <table>
+                <tr>
+                    <td>ИД пользователя</td>
+                    <td>Имя пользователя</td>
+                    <td>Пароль</td>                                           
+                    <td></td>                 
+                    <td></td>                  
+                </tr>
+                {{#each data}}
+                    <tr>      
+                        <td>{{this.user_id}}</td>
+                        <td>{{this.username}}</td>
+                        <td>{{this.password}}</td>                            
+                        <td><a href="/change_user?user_id={{this.user_id}}">Изменить</a></td> 
+                        <td><a href="/delete_user?user_id={{this.user_id}}">Удалить</a></td>
+                    </tr>      
+                {{/each}}  
+            </table>
+        </section>
+    </div>
+</body>
+</html>

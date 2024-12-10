@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    {{#if access.adminAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+                    {{#if access.storageSpecialistAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+
+                    {{#if access.adminAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+                    {{#if access.clientManagerAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+                    
+                    <li><a href="/information" class="link">Информация</a></li>
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section add-section">
+            <form action="/add_contract" method="post">               
+                        <p>ИД сотрудника: <select name="employee_id" id="" aria-placeholder="ИД сотрудника">
+                            {{#each employees}}
+                                <option value="{{this.employee_id}}">{{this.employee_id}}</option>
+                            {{/each}}
+                        </select></p>
+                        <p>ИД клиента: <select name="client_id" id="" aria-placeholder="ИД клиента">
+                            {{#each clients}}
+                                <option value="{{this.client_id}}">{{this.client_id}}</option>
+                            {{/each}}
+                        </select></p>
+                        <p>ИД заложенной вещи: <select name="pledged_item_id" id="" aria-placeholder="ИД заложенной вещи">
+                            {{#each pledged_items}}
+                                <option value="{{this.pledged_item_id}}">{{this.pledged_item_id}}</option>
+                            {{/each}}
+                        </select></p>
+                        <p>Дата заключения: <input type="datetime-local" name="sign_date" placeholder="Дата заключения" value="{{data.sign_date}}" step="1"></p>
+                        <p>Сумма залога: <input type="number" name="bail" placeholder="Сумма залога" value="{{data.bail}}"></p>
+                        <p>Комиссия: <input type="number" name="commission_fee" placeholder="Комиссия" value="{{data.commission_fee}}"></p>
+                        <button type="submit" class="add-btn">Добавить</button>
+                    </form>
+        </section>
+
+        <section class="section">
+            <table>
+                <tr>
+                    <td>ИД контракта</td>
+                    <td>ИД сотрудника</td>
+                    <td>ИД клиента</td>
+                    <td>ИД заложенной вещи</td> 
+                    <td>Дата заключения</td> 
+                    <td>Сумма залога</td> 
+                    <td>Комиссия</td> 
+                    <td></td> 
+                    <td></td>               
+                </tr>
+                {{#each data}}
+                    <tr>                    
+                        <td>{{this.contract_id}}</td>
+                        <td>{{this.employee_id}}</td>
+                        <td>{{this.client_id}}</td>
+                        <td>{{this.pledged_item_id}}</td>  
+                        <td>{{this.sign_date }}</td> 
+                        <td>{{this.bail }}</td>  
+                        <td>{{this.commission_fee }}</td>                                                     
+                        <td><a href="/change_contract?contract_id={{this.contract_id}}">Изменить</a></td> 
+                        <td><a href="/delete_contract?contract_id={{this.contract_id}}">Удалить</a></td>                                              
+                    </tr>      
+                {{/each}}  
+            </table>
+        </section>
+    </div>
+</body>
+</html>

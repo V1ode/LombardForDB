@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    <li><a href="/contracts" class="link">Контракты</a></li>
+                    <li><a href="/information" class="link">Информация</a></li>
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section add-section">
+            <form action="/add_client" method="post">
+                <p>Фамилия: <input type="text" name="last_name" placeholder="Фамилия"></p>
+                <p>Имя: <input type="text" name="first_name" placeholder="Имя"></p>
+                <p>Номер телефона: <input type="tel" name="phone_number" placeholder="Номер телефона"></p>
+                <p>Серия паспорта: <input type="number" name="pasport_series" placeholder="Серия паспорта"></p>
+                <p>Номер паспорта: <input type="number" name="pasport_number" placeholder="Номер паспорта"></p>
+                <button type="submit" class="add-btn">Добавить</button>
+            </form>
+        </section>
+
+        <section class="section">
+            <table>
+                <tr>
+                    <td>ИД клиента</td>
+                    <td>Фамилия</td> 
+                    <td>Имя</td>                    
+                    <td>Номер телефона</td>  
+                    <td>Серия паспорта</td> 
+                    <td>Номер паспорта</td>                        
+                    <td></td>                 
+                    <td></td>                  
+                </tr>
+                {{#each data}}
+                    <tr>                    
+                        <td>{{this.client_id}}</td>
+                        <td>{{this.last_name}}</td>
+                        <td>{{this.first_name}}</td>
+                        <td>{{this.phone_number}}</td>  
+                        <td>{{this.pasport_series }}</td> 
+                        <td>{{this.pasport_number }}</td>                             
+                        <td><a href="/change_client?client_id={{this.client_id}}">Изменить</a></td> 
+                        <td><a href="/delete_client?client_id={{this.client_id}}">Удалить</a></td>
+                    </tr>      
+                {{/each}}  
+            </table>
+        </section>
+    </div>
+</body>
+</html>

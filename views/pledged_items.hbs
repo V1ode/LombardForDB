@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    {{#if access.adminAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+                    {{#if access.storageSpecialistAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+
+                    {{#if access.adminAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+                    {{#if access.clientManagerAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+
+                    <li><a href="/information" class="link">Информация</a></li>
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section add-section">
+            <form action="/add_pledged_item" method="post">               
+                <p>ИД категории: <select name="category_id" id="" aria-placeholder="ИД категории">
+                    {{#each categories}}
+                        <option value="{{this.category_id}}">{{this.category_id}}</option>
+                    {{/each}}
+                </select></p>                      
+                <p>Наименование: <input type="text" name="pledged_item_name" placeholder="Наименование"></p>
+                <p>Стоимость: <input type="number" name="price" placeholder="Сумма залога"></p>
+                <p>Уровень качества: <select name="quality" aria-placeholder="Уровень качества">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select></p>
+                <button type="submit" class="add-btn">Добавить</button>
+            </form>
+        </section>
+
+        <section class="section">
+            <table>
+                <tr>
+                    <td>ИД заложенной вещи</td>
+                    <td>ИД категории</td>
+                    <td>Наименование</td>
+                    <td>Стоимость</td> 
+                    <td>Уровень качества</td>                                            
+                    <td></td>                 
+                    <td></td>                      
+                </tr>
+                {{#each data}}
+                    <tr>                    
+                        <td>{{this.pledged_item_id}}</td>
+                        <td>{{this.category_id}}</td>
+                        <td>{{this.pledged_item_name}}</td>
+                        <td>{{this.price }}</td> 
+                        <td>{{this.quality }}</td>                                                       
+                        <td><a href="/change_pledged_item?pledged_item_id={{this.pledged_item_id}}">Изменить</a></td> 
+                        <td><a href="/delete_pledged_item?pledged_item_id={{this.pledged_item_id}}">Удалить</a></td>
+                    </tr>      
+                {{/each}}  
+            </table>
+        </section>
+    </div>
+</body>
+</html>

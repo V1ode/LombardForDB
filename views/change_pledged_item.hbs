@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    {{#if access.adminAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+                    {{#if access.storageSpecialistAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+
+                    {{#if access.adminAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+                    {{#if access.clientManagerAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+                    
+                    <li><a href="/information" class="link">Информация</a></li>
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section add-section">
+            <table>
+                <tr>
+                    <td>ИД заложенной вещи</td>
+                    <td>ИД категории</td>
+                    <td>Наименование</td>                    
+                    <td>Стоимость</td> 
+                    <td>Уровень качества</td>                                            
+                    <td></td>                 
+                    <td></td>                      
+                </tr>
+
+                <tr>
+                    <form action="/change_pledged_item" method="post">
+                        <td><input type="number" name="pledged_item_id" value="{{data.pledged_item_id}}" readonly></td>       
+                        <td><select name="category_id" id="" aria-placeholder="ИД категории">
+                            <option value="{{data.category_id}}" selected>{{data.category_id}}</option>
+                            {{#each categories}}
+                                <option value="{{this.category_id}}">{{this.category_id}}</option>
+                            {{/each}}
+                        </select></td>      
+                        <td><input type="text" name="pledged_item_name" placeholder="Наименование" value="{{data.pledged_item_name}}"></td>                        
+                        <td><input type="number" name="price" placeholder="Сумма залога" value="{{data.price}}"></td>
+                        <td><select name="quality" id="" aria-placeholder="Уровень качества">
+                            <option value="{{data.quality}}" selected>{{data.quality}}</option>
+                            {{#each qualities}}
+                                <option value="{{this.quality}}">{{this.quality}}</option>
+                            {{/each}}
+                        </select></td>                        
+                        <button type="submit" class="add-btn">Сохранить</button>
+                    </form>
+                </tr>
+            </table>
+        </section>
+    </div>
+</body>

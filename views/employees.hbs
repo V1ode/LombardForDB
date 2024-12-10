@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    <li><a href="/contracts" class="link">Контракты</a></li>
+                    <li><a href="/information" class="link">Информация</a></li>
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section add-section">
+            <form action="/add_employee" method="post">
+                <p>Фамилия: <input type="text" name="last_name" placeholder="Фамилия"></p>
+                <p>Имя: <input type="text" name="first_name" placeholder="Имя"></p>               
+                <p>ИД подразделения: <select name="division_id" id="" aria-placeholder="ИД подразделения">
+                    {{#each divisions}}
+                        <option value="{{this.division_id}}">{{this.division_id}}</option>
+                    {{/each}}
+                </select></p>   
+                <p>ИД должности: <select name="post_id" id="" aria-placeholder="ИД должности">
+                    {{#each posts}}
+                        <option value="{{this.post_id}}">{{this.post_id}}</option>
+                    {{/each}}
+                </select></p>              
+                <p>Номер телефона: <input type="tel" name="phone_number" placeholder="Номер телефона"></p>                
+                <button type="submit" class="add-btn">Добавить</button>
+            </form>            
+        </section>
+
+        <section class="section">
+            <table>
+                <tr>
+                    <td>ИД сотрудника</td>                       
+                    <td>Фамилия</td>
+                    <td>Имя</td>     
+                    <td>ИД подразделения</td> 
+                    <td>ИД должности</td>                                  
+                    <td>Номер телефона</td>  
+                    <td></td>                 
+                    <td></td>             
+                </tr>
+                {{#each data}}
+                    <tr>                    
+                        <td>{{this.employee_id}}</td>  
+                        <td>{{this.last_name}}</td>
+                        <td>{{this.first_name}}</td>                                              
+                        <td>{{this.division_id }}</td> 
+                        <td>{{this.post_id }}</td>
+                        <td>{{this.phone_number}}</td>   
+                        <td><a href="/change_employee?employee_id={{this.employee_id}}">Изменить</a></td> 
+                        <td><a href="/delete_employee?employee_id={{this.employee_id}}">Удалить</a></td>                       
+                    </tr>      
+                {{/each}}  
+            </table>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    {{#if access.adminAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+                    {{#if access.storageSpecialistAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+
+                    {{#if access.adminAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+                    {{#if access.clientManagerAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+
+                    <li><a href="/information" class="link">Информация</a></li>                    
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section">
+            <h1>От честной работы - к большим результатам</h1>
+        </section>
+    </div>
+</body>
+</html>

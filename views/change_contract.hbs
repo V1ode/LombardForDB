@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    {{#if access.adminAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+                    {{#if access.storageSpecialistAccess }}
+                        <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    {{/if}}
+
+                    {{#if access.adminAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+                    {{#if access.clientManagerAccess }}
+                        <li><a href="/contracts" class="link">Контракты</a></li>
+                    {{/if}}
+                    
+                    <li><a href="/information" class="link">Информация</a></li>
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section add-section">
+            <table>
+                <tr>
+                    <td>ИД контракта</td>
+                    <td>ИД сотрудника</td>
+                    <td>ИД клиента</td>
+                    <td>ИД заложенной вещи</td> 
+                    <td>Дата заключения</td> 
+                    <td>Сумма залога</td> 
+                    <td>Комиссия</td> 
+                    <td></td> 
+                    <td></td>               
+                </tr>
+
+                <tr>
+                    <form action="/change_contract" method="post">
+                        <td><input type="number" name="contract_id" value="{{data.contract_id}}" readonly></td>                
+                        <td><select name="employee_id" id="" aria-placeholder="ИД сотрудника">
+                            <option value="{{data.employee_id}}" selected>{{data.employee_id}}</option>
+                            {{#each employees}}
+                                <option value="{{this.employee_id}}">{{this.employee_id}}</option>
+                            {{/each}}
+                        </select></td>
+                        <td><select name="client_id" id="" aria-placeholder="ИД клиента">
+                            <option value="{{data.client_id}}" selected>{{data.client_id}}</option>
+                            {{#each clients}}
+                                <option value="{{this.client_id}}">{{this.client_id}}</option>
+                            {{/each}}
+                        </select></td>
+                        <td><select name="pledged_item_id" id="" aria-placeholder="ИД заложенной вещи">
+                            <option value="{{data.pledged_item_id}}" selected>{{data.pledged_item_id}}</option>
+                            {{#each pledged_items}}
+                                <option value="{{this.pledged_item_id}}">{{this.pledged_item_id}}</option>
+                            {{/each}}
+                        </select></td>
+                        <td><input type="datetime-local" name="sign_date" placeholder="Дата заключения" value="{{data.sign_date}}" step="1"></td>
+                        <td><input type="number" name="bail" placeholder="Сумма залога" value="{{data.bail}}"></td>
+                        <td><input type="number" name="commission_fee" placeholder="Комиссия" value="{{data.commission_fee}}"></td>
+                        <button type="submit" class="add-btn">Сохранить</button>
+                    </form>
+                </tr>
+            </table>
+        </section>
+    </div>
+</body>

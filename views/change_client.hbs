@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar__block">
+                <a href="/main" class="logo">
+                    <img src="logo.jpg" alt="">
+                </a>            
+
+                <ul class="navbar__block__list">
+                    <li><a href="/pledged_items" class="link">Заложенные вещи</a></li>
+                    <li><a href="/contracts" class="link">Контракты</a></li>
+                    <li><a href="/information" class="link">Информация</a></li>
+                </ul>
+
+                <a href="/exit" class="exit-link">Выйти</a>
+            </div>
+        </nav>
+
+        <section class="section add-section">
+            <table>
+                <tr>
+                    <td>ИД клиента</td>
+                    <td>Фамилия</td> 
+                    <td>Имя</td>                    
+                    <td>Номер телефона</td>  
+                    <td>Серия паспорта</td> 
+                    <td>Номер паспорта</td>                                        
+                </tr>
+
+                <tr>
+                    <form action="/change_client" method="post">
+                        <td><input type="number" name="client_id" value="{{data.client_id}}" readonly></td>       
+                        <td><input type="text" name="last_name" placeholder="Фамилия" value="{{data.last_name}}"></td>
+                        <td><input type="text" name="first_name" placeholder="Имя" value="{{data.first_name}}"></td>
+                        <td><input type="tel" name="phone_number" placeholder="Номер телефона" value="{{data.phone_number}}"></td>
+                        <td><input type="number" name="pasport_series" placeholder="Серия паспорта" value="{{data.pasport_series}}"></td>
+                        <td><input type="number" name="pasport_number" placeholder="Номер паспорта" value="{{data.pasport_number}}"></td>                     
+                        <button type="submit" class="add-btn">Сохранить</button>
+                    </form>
+                </tr>
+            </table>
+        </section>
+    </div>
+</body>
